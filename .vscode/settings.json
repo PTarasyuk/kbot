@@ -1,6 +1,12 @@
 {
     "cSpell.words": [
         "kbot",
+        "Pavlo",
+        "ptarasyuk",
+        "Tarasiuk",
         "telebot"
+    ],
+    "cSpell.ignoreWords": [
+        "ldflags"
     ]
 }
