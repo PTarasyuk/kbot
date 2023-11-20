@@ -56,6 +56,15 @@ Run KBot using the following command:
 
 ## Usage
 
-```bash
-/start hello
-```
+This project uses a Makefile for common tasks. Run the following commands:
+
+- Format Code: `make format`
+- Lint Code: `make lint`
+- Run Tests: `make test`
+- Get Dependencies: `make get`
+- Build Application: `make build` (Override `REGISTRY`, `TARGETOS` and `TARGETARCH` with `make build REGISTRY=ptarasyuk TARGETOS=linux TARGETARCH=arm`)
+- Create Docker Image: `make image` (Override `REGISTRY`, `TARGETOS` and `TARGETARCH` with `make image REGISTRY=ptarasyuk TARGETOS=linux TARGETARCH=arm`)
+- Push Docker Image: `make push` (Override `REGISTRY`, `TARGETOS` and `TARGETARCH` with `make push REGISTRY=ptarasyuk TARGETOS=linux TARGETARCH=arm`)
+- Clean: `make clean`
+
+For more details and options, run `make help`.
