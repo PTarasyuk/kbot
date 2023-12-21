@@ -1,0 +1,25 @@
+To use the Telegram Bot with this application, you need to provide a Telegram Bot token during installation. Follow the steps below:
+
+1. Obtain a Telegram Bot Token:
+   - If you don't have a Telegram Bot, create one by talking to the BotFather on Telegram. Follow these steps:
+     - Start a chat with the BotFather (https://t.me/botfather).
+     - Use the `/newbot` command to create a new bot.
+     - Follow the instructions to choose a name and username for your bot.
+     - Once created, the BotFather will provide you with a token like `123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11`.
+
+2. Install the Helm Chart:
+   Run the following Helm command to install the application, providing your Telegram Bot token as a parameter:
+   
+   `helm install my-release ./my-chart --set secret.key=YOUR_TELEGRAM_BOT_TOKEN`
+
+3. Verify the Installation:
+   After installation, verify that the application is running and configured with your Telegram Bot token:
+   
+   `kubectl get pods`
+
+   Make sure the pods are in the 'Running' state.
+
+4. Start Interacting with the Telegram Bot:
+   Now that the application is installed, start interacting with your Telegram Bot. For example, send a test command to the bot.
+
+For more information and configuration options, refer to the Helm chart documentation.
