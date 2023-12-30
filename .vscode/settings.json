@@ -9,6 +9,8 @@
         "telebot"
     ],
     "cSpell.ignoreWords": [
-        "ldflags"
+        "ldflags",
+        "mikefarah",
+        "strenv"
     ]
 }
