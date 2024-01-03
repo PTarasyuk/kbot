@@ -1,10 +1,10 @@
-APP=$(shell basename -s .git $(shell git remote get-url origin))
+#APP=$(shell basename -s .git $(shell git remote get-url origin))
 VERSION=$(shell git describe --tags --abbrev=0)-$(shell git rev-parse --short HEAD)
 
 # Default variables for TARGETOS and TARGETARCH
 REGISTRY_DEFAULT=ptarasyuk
 TARGETOS_DEFAULT=linux
-TARGETARCH_DEFAULT=amd64
+TARGETARCH_DEFAULT=arm64 # arm64, amd64
 
 # We use ?= to enable them to be reassigned from the command line
 REGISTRY ?= $(REGISTRY_DEFAULT)
@@ -27,14 +27,14 @@ build: format get ## Build the application
 	CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -v -o kbot -ldflags "-X="github.com/PTarasyuk/kbot/cmd.appVersion=${VERSION}
 
 image: ## Create a Docker image
-	docker build . -t ${REGISTRY}/${APP}:${VERSION}-${TARGETARCH}
+	docker build . -t ${REGISTRY}:${VERSION}-${TARGETOS}-${TARGETARCH}  --build-arg TARGETARCH=${TARGETARCH} --build-arg TARGETOS=${TARGETOS}
 
 push: ## Push Docker image to the registry
-	docker push ${REGISTRY}/${APP}:${VERSION}-${TARGETARCH}
+	docker push ${REGISTRY}:${VERSION}-${TARGETOS}-${TARGETARCH}
 
 clean: ## Remove the built executable and docker image
 	rm -rf kbot
-	docker rmi -f ${REGISTRY}/${APP}:${VERSION}-${TARGETARCH}
+	docker rmi -f ${REGISTRY}:${VERSION}-${TARGETOS}-${TARGETARCH}
 
 help: ## Display this help message
 	@echo "Usage: make [target] [REGISTRY=value] [TARGETOS=value] [TARGETARCH=value]"
