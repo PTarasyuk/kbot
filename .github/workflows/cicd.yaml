@@ -26,8 +26,9 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Build&Push image
-        run: make image push clean TARGETARCH=$TARGETARCH REGISTRY=$REGISTRY
+        run: make image push clean TARGETARCH=${{ env.TARGETARCH }} REGISTRY=${{ env.REGISTRY }}
 
   cd:
     name: CD
