@@ -3,7 +3,7 @@ name: KBOT-CICD
 on: push
 
 env:
-  TARGETREF: amd64
+  TARGETARCH: amd64
   REGISTRY: ghcr.io/${{ github.repository }}
 
 jobs:
