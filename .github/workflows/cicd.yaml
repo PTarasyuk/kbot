@@ -6,7 +6,7 @@ env:
   TARGETOS: linux
   TARGETARCH: amd64
   REGISTRY: ghcr.io
-  REPO: ghcr.io/${{ github.repository }}
+  REPO: ${{ github.repository }}
 
 jobs:
   ci:
@@ -34,7 +34,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build&Push image
-        run: make image push clean TARGETARCH=${{ env.TARGETARCH }} REGISTRY=${{ env.REPO }}
+        run: make image push clean TARGETARCH=${{ env.TARGETARCH }} REGISTRY="${{ env.REGISTRY }}/${{ env.REPO }}"
 
   cd:
     name: CD
