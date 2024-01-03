@@ -4,7 +4,7 @@ on: push
 
 env:
   TARGETARCH: amd64
-  REGISTRY: ghcr.io/${{ lowercase(github.repository) }}
+  REGISTRY: ghcr.io/${{ github.repository }}
 
 jobs:
   ci:
@@ -12,6 +12,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Lowercase REGISTRY
+        run: |
+          echo "REGISTRY=${REGISTRY,,}" >> ${GITHUB_ENV}
+
       - name: Checkout
         uses: actions/checkout@v3
         with:
