@@ -4,8 +4,8 @@
 
 replicaCount: 1
 image:
-  repository: ghcr.io/PTarasyuk/kbot
-  tag: "v1.0.7-d6da86e"
+  repository: ghcr.io/ptarasyuk/kbot
+  tag: "v1.0.7-b585f50"
   arch: "amd64"
   registry: ghcr.io
   os: linux
