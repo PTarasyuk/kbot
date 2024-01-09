@@ -5,7 +5,7 @@
 replicaCount: 1
 image:
   repository: ptarasyuk
-  tag: "v1.0.7-806ea6a"
+  tag: "v1.0.7-6700e49"
   arch: "amd64"
 secret:
   name: "kbot"
