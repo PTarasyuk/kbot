@@ -6,7 +6,7 @@ pipeline {
         BRANCH = 'main'
     }
 
-    parametrs {
+    parameters {
         choice(name: 'arch', choices: ['amd64', 'arm64'], description: 'Target architecture')
         choice(name: 'os', choices: ['linux', 'darwin', 'windows'], description: 'Target OS')
     }
