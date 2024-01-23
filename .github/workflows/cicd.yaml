@@ -42,15 +42,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - run: |
+      - name: Lowercase REPO
+        run: |
           echo "REPO=${REPO,,}" >> ${GITHUB_ENV}
 
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0  
       - run: echo "VERSION=$(git describe --tags --abbrev=0)-$(git rev-parse --short HEAD)" >> $GITHUB_ENV
 
-      - uses: mikefarah/yq@master
+      - name: Update Helm Chart
+        uses: mikefarah/yq@master
         with:
           cmd: yq -i '
                 .image.registry=strenv(REGISTRY) |
@@ -59,9 +62,15 @@ jobs:
                 .image.os=strenv(TARGETOS) |
                 .image.arch=strenv(TARGETARCH)
               ' helm/values.yaml
-
       - run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
           git commit -am "Update version $VERSION"
           git push
+
+      - name: Pushing Helm Chart
+        run: |
+          # create chart package for chart `kbot`
+          helm package kbot
+          # Get packed chart file name
+          PKG_NAME=`ls *.tgz`
