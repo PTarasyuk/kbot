@@ -26,10 +26,10 @@ jobs:
       - name: Run test
         run: make test
 
-      - name: Login to GitHub Container Registry
+      - name: Login to OCI Registry
         uses: docker/login-action@v3
         with:
-          registry: ghcr.io
+          registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
@@ -68,9 +68,18 @@ jobs:
           git commit -am "Update version $VERSION"
           git push
 
+      - name: Login to OCI Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Pushing Helm Chart
         run: |
-          # create chart package for chart `kbot`
+          # Create chart package 
           helm package helm --version "${VERSION}-${TARGETOS}-${TARGETARCH}"
           # Get packed chart file name
           PKG_NAME=`ls *.tgz`
+          # Pushing helm package to OCI registry
+          helm push ${PKG_NAME} oci://${REGISTRY}/${REPO}/charts
