@@ -71,6 +71,6 @@ jobs:
       - name: Pushing Helm Chart
         run: |
           # create chart package for chart `kbot`
-          helm package kbot
+          helm package helm --version "${VERSION}-${TARGETOS}-${TARGETARCH}"
           # Get packed chart file name
           PKG_NAME=`ls *.tgz`
