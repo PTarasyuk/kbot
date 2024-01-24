@@ -77,9 +77,10 @@ jobs:
 
       - name: Pushing Helm Chart
         run: |
+          REPO_OWNER=`echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]'`
           # Create chart package 
           helm package helm --version "${VERSION}-${TARGETOS}-${TARGETARCH}"
           # Get packed chart file name
           PKG_NAME=`ls *.tgz`
           # Pushing helm package to OCI registry
-          helm push ${PKG_NAME} oci://${REGISTRY}/${github.actor}/charts
+          helm push ${PKG_NAME} oci://${REGISTRY}/${REPO_OWNER}/charts
