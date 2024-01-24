@@ -82,4 +82,4 @@ jobs:
           # Get packed chart file name
           PKG_NAME=`ls *.tgz`
           # Pushing helm package to OCI registry
-          helm push ${PKG_NAME} oci://${REGISTRY}/${REPO}/charts
+          helm push ${PKG_NAME} oci://${REGISTRY}/${github.actor}/charts
